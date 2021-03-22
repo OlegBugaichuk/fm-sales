@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, status
 from api.users.crud import get_user_by_login
 from .schemas import Login, Token
 from .helpers import check_user_password, create_access_token
@@ -15,4 +15,4 @@ async def login(login_info: Login):
             'token_type': 'Bearer'
         }
     else:
-        raise HTTPException(status_code=400, detail='Invalid login or password')
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='Invalid login or password')
