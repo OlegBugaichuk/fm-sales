@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
+from api.users.crud import get_user_by_login
 from .schemas import Login, Token
-from .crud import get_user_by_login
 from .helpers import check_user_password, create_access_token
 
 router = APIRouter()

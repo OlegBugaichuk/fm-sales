@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, validator
 
 
 class Login(BaseModel):
@@ -6,14 +6,12 @@ class Login(BaseModel):
     password: str
 
 
-class User(BaseModel):
-    id: int
-    login: str
-    password: str = Field(alias='pass')
-    name: str
-    surname: str
-
-
 class Token(BaseModel):
-    access_token: str
     token_type: str
+    access_token: str
+
+    @validator('token_type')
+    def validate_token_type(cls, value):
+        if value != 'Bearer':
+            raise ValueError('Token type must be "Bearer"!')
+        return value
