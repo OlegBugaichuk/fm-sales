@@ -8,7 +8,7 @@ from .crud import get_current_user
 router = APIRouter()
 
 
-@router.get('/me')
+@router.get('/me', response_model=User)
 async def me(token:Token = Depends(token_depend)) -> User:
     try:
         user = get_current_user(token)

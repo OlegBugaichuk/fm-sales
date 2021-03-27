@@ -1,9 +1,9 @@
 from sqlalchemy import text
-from core.auth.schemas import Token
 
+from core.auth.schemas import Token
+from core.auth.helpers import decode_access_token
 from core.db.base import engine
 from core.db.tables import tables
-from core.auth.helpers import decode_access_token
 from .schemas import UserInDb, User
 
 def get_user_by_login(login: str) -> UserInDb:
