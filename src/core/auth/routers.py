@@ -15,4 +15,7 @@ async def login(login_info: Login):
             'token_type': 'Bearer'
         }
     else:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='Invalid login or password')
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, 
+            detail='Invalid login or password'
+        )

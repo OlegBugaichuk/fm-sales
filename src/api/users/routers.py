@@ -15,7 +15,9 @@ async def me(token:Token = Depends(token_depend)):
     try:
         user = get_current_user(token)
     except Exception:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Check Token')
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED, detail='Check Token'
+        )
     return user
 
 
@@ -31,7 +33,9 @@ async def get_users(user_id: int, token: Token = Depends(token_depend)):
     if user:
         return user
     else:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='User not found')
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail='User not found'
+        )
 
 
 @router.get('/me/stats', response_model=UserStat)

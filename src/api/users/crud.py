@@ -10,7 +10,9 @@ from .schemas import UserInDb, User, UserStat as UserStatSchema
 
 def get_users_list() -> List[User] or None:
     with engine.connect() as connection:
-        result = connection.execute(text(f'select * from {tables["users"]} where active=1'))
+        result = connection.execute(
+            text(f'select * from {tables["users"]} where active=1')
+        )
         try:
             users = parse_obj_as(List[User], result.fetchall())
             return users
@@ -22,7 +24,9 @@ def get_users_list() -> List[User] or None:
 def get_user_by_login(login: str) -> UserInDb or None:
     
     with engine.connect() as connection:
-        result = connection.execute(text(f'select * from {tables["users"]} where active=1 and login="{login}"'))
+        result = connection.execute(
+            text(f'select * from {tables["users"]} where active=1 and login="{login}"')
+        )
         try:
             user = UserInDb(**result.first())
             return user
@@ -32,7 +36,9 @@ def get_user_by_login(login: str) -> UserInDb or None:
 
 def get_user_by_id(user_id: int) -> User or None:
     with engine.connect() as connection:
-        result = connection.execute(text(f'select * from {tables["users"]} where active=1 and id="{user_id}"'))
+        result = connection.execute(
+            text(f'select * from {tables["users"]} where active=1 and id="{user_id}"')
+        )
         try:
             user = User(**result.first())
             return user
